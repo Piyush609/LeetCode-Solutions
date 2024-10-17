@@ -1,0 +1,58 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode *h1 = l1;
+        ListNode *h2 = l2;
+
+        ListNode *rs = new ListNode(-1);
+        int c = 0;
+        ListNode *t = rs;
+        while(h1 and h2){
+            int d1 = h1 -> val;
+            int d2 = h2 -> val;
+
+            int d = d1 + d2 + c;
+
+            int to_a = d % 10;
+            c = d / 10;
+
+            ListNode *newNo = new ListNode(to_a);
+            t->next = newNo;
+            t = t->next;
+
+            h1 = h1->next;
+            h2 = h2->next;
+        }
+        while(h1){
+            int d1 = h1 -> val;
+            int d = d1 + c;
+
+            int to_a = d % 10;
+            c = d / 10;
+
+            ListNode *newNo = new ListNode(to_a);
+            t->next = newNo;
+            t = t->next;
+
+            h1 = h1->next;
+        }while(h2){
+            int d2 = h2 -> val;
+
+            int d = d2 + c;
+
+            int to_a = d % 10;
+            c = d / 10;
+
+            ListNode *newNo = new ListNode(to_a);
+            t->next = newNo;
+            t = t->next;
+
+            h2 = h2->next;
+        }
+        if(c){
+            ListNode *newNo = new ListNode(1);
+            t->next = newNo;
+        }
+        return rs->next;
+    }
+};
