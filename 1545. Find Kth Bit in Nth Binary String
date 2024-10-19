@@ -1,0 +1,20 @@
+class Solution {
+public:
+    char findKthBit(int n, int k) {
+        string s = "0"; k -= 1;
+        auto rev = [&](string s)->string{
+            reverse(begin(s),end(s)); return s;
+        };
+        auto inv = [&](string s)->string{
+            for(char &ch : s){
+                if(ch == '1') ch = '0';
+                else ch = '1';
+            }
+            return s;
+        };
+        while(n--){
+            s = s + "1" + rev(inv(s));
+        }
+        return s[k];
+    }
+};
