@@ -1,0 +1,32 @@
+// Time complexity -> O((2^N)*N)
+// Space complexity -> O(No of distinct substring)
+// N = size of input string
+
+class Solution {
+public:
+    int maxUniqueSplit(string s) {
+        int n = s.size();
+        int ans = 0;
+        for(int i = 0; i < (1 << n); i++){
+            string bit(n,'0');
+            for(int j = 0; j < n; j++){
+                if(i & (1 << j)){
+                    bit[j] = '1';
+                }
+            }
+            unordered_set<string>ss;
+            for(int j = 0; j < n;){
+                string curr = "";
+                curr.push_back(s[j]);
+                int k = j + 1;
+                while(k < n and bit[k] == bit[j]){
+                    curr.push_back(s[k]); k++;
+                }
+                ss.insert(curr);
+                j = k;
+            }
+            ans = max(ans,(int)(ss.size()));
+        }
+        return ans;
+    }
+};
