@@ -1,0 +1,23 @@
+Time Complexity -> O(64)
+Space Complexity -> O(1)
+
+class Solution {
+public:
+    long long minEnd(int n, int x) {
+        if(n == 1) return x;
+        using ll = long long;
+        ll ans = 0, b = 0, t = 2;
+        n--;
+        for(ll i = 0; i <= 60; i++){
+            if(x & (1LL << i)) ans |= (1LL << i);
+            else{
+                ll d = (1LL << b);
+                d *= t;
+                if(n % d >= (d / 2)) 
+                    ans |= (1LL << i);
+                b++;
+            }
+        }
+        return ans;
+    }
+};
