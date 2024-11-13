@@ -1,0 +1,31 @@
+Time Complexity -> NlogN
+Space Complexity -> O(1)
+class Solution {
+    public long countFairPairs(int[] nums, int lower, int upper) {
+        long a = 0;
+        Arrays.sort(nums);
+        System.out.println(Arrays.toString(nums));
+        int n = nums.length;
+        for(int i = 0; i < n; i++){
+            int an1 = -1, an2 = -1;
+            int l = i + 1, h = n - 1;
+            while(l <= h){
+                int md = l + (h - l) / 2;
+                if(nums[md] + nums[i] >= lower){
+                    an1 = md; h = md - 1;
+                }else l = md + 1;
+            }
+            l = i + 1; h = n - 1;
+            while(l <= h){
+                int md = l + (h - l) / 2;
+                if(nums[md] + nums[i] <= upper){
+                    an2 = md; l = md + 1;
+                }else h = md - 1;
+            }
+            if(an1 == -1 || an2 == -1 || an1 > an2)
+                continue;
+            a += (an2 - an1 + 1);
+        }
+        return a;
+    }
+}
