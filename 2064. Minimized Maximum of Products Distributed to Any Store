@@ -1,0 +1,22 @@
+NlogN
+
+class Solution {
+    boolean ok(int []arr, int len,int n){
+        int tem = 0;
+        for(int i : arr){
+            tem += (i + (len - 1)) / len;
+        }
+        return tem <= n;
+    }
+    public int minimizedMaximum(int n, int[] quantities) {
+        int l = 1, h = 100000; int ans = 0;
+        while(l <= h){
+            int md = l + (h - l) / 2;
+            if(ok(quantities,md,n)){
+                ans = md; h = md - 1;
+            }else l = md + 1;
+        }return ans;
+
+        
+    }
+}
